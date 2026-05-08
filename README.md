@@ -13,7 +13,7 @@ Bianca Serio, Lars Dinkelbach, Mylla Marsiglia, Laura Waite, Felix Hoffstaedter,
 
 **2. Getting & preparing the data**
 - `getting_data/get_ABCD_data_fmriprep_xcp-d_fc_specifiedsubs_*.sh` gets and postprocesses ABCD fMRIprep files from DataLad using XCP-D - outputs FC matrices  (* scripts per ABCD timepoint)
-- `getting_data/p3_sort_XCPd_output_all_available_data_*.py` sorts XCP-D output for all available data in /pt_02667/ directory  (* scripts per ABCD timepoint)
+- `getting_data/p3_sort_XCPd_output_all_available_data_*.py` sorts XCP-D output (* scripts per ABCD timepoint)
 - `getting_data/get_ABCD_data_freesurfer_specified_files_all_available_subs_*.sh` downloades ABCD data freesurfer files from DataLad (* scripts per ABCD timepoint)
 - `getting_data/p3_area2mgh.sh` converts native FreeSurfer surfaces .area to .mgh format (for total surface area computation)
 - `getting_data/p3_sort_SA_output_*.py` computes total surface area by extracting data output of script p3_area2mgh.sh and summing across hemispheres (* scripts per ABCD timepoint)
@@ -57,7 +57,7 @@ Bianca Serio, Lars Dinkelbach, Mylla Marsiglia, Laura Waite, Felix Hoffstaedter,
 
 
 ## Support
-Please address any questions about the analyses or code to [Bianca Serio](mailto:serio@cbs.mpg.de)
+Please address any questions about the manuscript, analyses or code to [Bianca Serio](mailto:serio@cbs.mpg.de)
 
 ---
 
