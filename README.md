@@ -66,4 +66,4 @@ Please address any questions about the manuscript, analyses or code to [Bianca S
 - Annual meeting of the Organization for the Study of Sex Differences (OSSD), Hawaii 2026
 
 
-![alt text](https://github.com/biancaserio/dev_age_puberty_gradients/master/Poster.png?raw=true)
+![alt text](https://github.com/biancaserio/dev_age_puberty_gradients/blob/master/Poster.png?raw=true)
