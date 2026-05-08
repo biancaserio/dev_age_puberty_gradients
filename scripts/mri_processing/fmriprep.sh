@@ -1,0 +1,3 @@
+# Note that although ICA-AROMA was included in this pipeline as a correction for motion-related artefacts, we did not use this denoised output for our subsequent processing steps and analyses
+
+/singularity inputs/ABCD fmriprep participant --participant-label $subid --work-dir workdir --clean-workdir --skip_bids_validation --fs-subjects-dir inputs/ABCD_freesurfer/$subid --fs-license-file code/pipeline/license.txt --nthreads 16 --omp-nthreads 16 --mem 14000 --random-seed 12345 --skull-strip-fixed-seed --stop-on-first-crash --use-aroma --output-spaces func fsaverage:den-10k --cifti-output 91k --notrack --verbose
