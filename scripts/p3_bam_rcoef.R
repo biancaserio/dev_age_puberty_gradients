@@ -44,7 +44,7 @@ rm(list = ls())
 #### set up directories
 codedir = dirname(getActiveDocumentContext()$path)  # get path to current script
 datadir = '/data/pt_02667/data/ABCD/'
-datadir_local = '/data/p_02667/development/data/'
+datadir_local = '/data/p_02667/development/data/pds_cleaned/'
 resdir = '/data/p_02667/development/results/'
 resdir_fig = '/data/p_02667/development/results/figures/'
 
@@ -219,7 +219,7 @@ str(list_SA_axis_corr_to_ref_long_z_M)
 str(list_SA_axis_corr_to_ref_long_z_F)
 
 
-# for descriptive info info
+# for descriptive info
 mean(list_SA_axis_corr_to_ref_long[male_idx])
 mean(list_SA_axis_corr_to_ref_long[female_idx])
 
@@ -277,8 +277,8 @@ any(duplicated(paste(covar_df$site_id, covar_df$family_id, covar_df$subject_id))
 
 # fyi
 length(unique(covar_df$site_id))  # 22
-length(unique(interaction(covar_df$site_id, covar_df$family_id, drop=TRUE)))  # 4424
-length(unique(interaction(covar_df$site_id, covar_df$family_id, covar_df$subject_id, drop=TRUE)))  # 4933
+length(unique(interaction(covar_df$site_id, covar_df$family_id, drop=TRUE)))  # 4367
+length(unique(interaction(covar_df$site_id, covar_df$family_id, covar_df$subject_id, drop=TRUE)))  # 4869
 
 
 ## -> Given that we get TRUE: not globally unique, we need to specify 3 random effects
