@@ -52,7 +52,7 @@ rm(list = ls())
 #### set up directories
 codedir = dirname(getActiveDocumentContext()$path)  # get path to current script
 datadir = '/data/pt_02667/data/ABCD/'
-datadir_local = '/data/p_02667/development/data/'
+datadir_local = '/data/p_02667/development/data/pds_cleaned/'
 resdir = '/data/p_02667/development/results/supplementary/SA_expansion_net_full_sample/'  # supplementary directory
 resdir_fig = '/data/p_02667/development/results/supplementary/SA_expansion_net_full_sample/figures/'  # supplementary directory
 
@@ -377,6 +377,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on S-A axis expansion",
@@ -463,6 +468,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -618,6 +628,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on similarity to adult S-A axis\n(Δ Fisher z)",
@@ -750,6 +765,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -889,6 +909,11 @@ plot_smes_SAexp = ggplot(df_SAexp, aes(x = SA_expansion_net_long, y = .estimate)
 plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
   labs(
     x = "Age (in months)",
@@ -1017,6 +1042,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   

@@ -66,11 +66,11 @@ mat_SA_axis_NOT_aligned_baseline <- readMat(paste(datadir_local, 'array_SA_axis_
 
 
 # r coefs
-list_SA_axis_corr_to_ref_baseline <- mat_SA_axis_NOT_aligned_baseline$list.SA.axis.corr.to.ref.baseline  # shape: 1, 4064
-list_SA_axis_corr_to_ref_baseline <- t(list_SA_axis_corr_to_ref_baseline)  #transposing to get the shape: 4064, 1
+list_SA_axis_corr_to_ref_baseline <- mat_SA_axis_NOT_aligned_baseline$list.SA.axis.corr.to.ref.baseline  # shape: 1, N
+list_SA_axis_corr_to_ref_baseline <- t(list_SA_axis_corr_to_ref_baseline)  #transposing to get the shape: N, 1
 
 # sub ID 
-sub_ID_baseline <- mat_SA_axis_NOT_aligned_baseline$sub.ID.baseline   # shape: 4064, 1
+sub_ID_baseline <- mat_SA_axis_NOT_aligned_baseline$sub.ID.baseline   # shape: N, 1
 
 
 dim(list_SA_axis_corr_to_ref_baseline)
@@ -81,11 +81,11 @@ dim(sub_ID_baseline)
 mat_SA_axis_NOT_aligned_fu2y <- readMat(paste(datadir_local, 'array_SA_axis_NOT_aligned_fu2y.mat', sep = ''))
 
 # r coefs
-list_SA_axis_corr_to_ref_fu2y <- mat_SA_axis_NOT_aligned_fu2y$list.SA.axis.corr.to.ref.fu2y  # shape: 1, 1296
-list_SA_axis_corr_to_ref_fu2y <- t(list_SA_axis_corr_to_ref_fu2y)  #transposing to get the shape: 1296, 1
+list_SA_axis_corr_to_ref_fu2y <- mat_SA_axis_NOT_aligned_fu2y$list.SA.axis.corr.to.ref.fu2y  # shape: 1, N
+list_SA_axis_corr_to_ref_fu2y <- t(list_SA_axis_corr_to_ref_fu2y)  #transposing to get the shape: N, 1
 
 # sub ID 
-sub_ID_fu2y <- mat_SA_axis_NOT_aligned_fu2y$sub.ID.fu2y   # shape: 1296, 1
+sub_ID_fu2y <- mat_SA_axis_NOT_aligned_fu2y$sub.ID.fu2y   # shape: N, 1
 
 
 dim(list_SA_axis_corr_to_ref_fu2y)
@@ -97,11 +97,11 @@ dim(sub_ID_fu2y)
 mat_SA_axis_NOT_aligned_fu4y <- readMat(paste(datadir_local, 'array_SA_axis_NOT_aligned_fu4y.mat', sep = ''))
 
 # r coefs
-list_SA_axis_corr_to_ref_fu4y <- mat_SA_axis_NOT_aligned_fu4y$list.SA.axis.corr.to.ref.fu4y  # shape: 1, 963
-list_SA_axis_corr_to_ref_fu4y <- t(list_SA_axis_corr_to_ref_fu4y)  #transposing to get the shape: 963, 1
+list_SA_axis_corr_to_ref_fu4y <- mat_SA_axis_NOT_aligned_fu4y$list.SA.axis.corr.to.ref.fu4y  # shape: 1, N
+list_SA_axis_corr_to_ref_fu4y <- t(list_SA_axis_corr_to_ref_fu4y)  #transposing to get the shape: N, 1
 
 # sub ID 
-sub_ID_fu4y <- mat_SA_axis_NOT_aligned_fu4y$sub.ID.fu4y   # shape: 963, 1
+sub_ID_fu4y <- mat_SA_axis_NOT_aligned_fu4y$sub.ID.fu4y   # shape: N, 1
 
 
 dim(list_SA_axis_corr_to_ref_fu4y)
@@ -343,18 +343,23 @@ smes_ylim <- range(
     df_pds$.estimate - 2 * df_pds$.se, df_pds$.estimate + 2 * df_pds$.se)
 )
 
-plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
+
+plot_smes_age <- ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
-    y = "Partial effect on similarity to adult S-A axis\n(Δ Fisher z)",
+    y = "Partial effect on similarity to adult S-A axis\n(Δ Fisher z)"
   ) +
   theme_minimal(base_size = 14) +
-  theme(
-    axis.text = element_text(color = "black")
-  )
+  theme(axis.text = element_text(color = "black"))
+
 
 plot_smes_pds = ggplot(df_pds, aes(x = pds, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
@@ -433,6 +438,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -715,10 +725,24 @@ summary_bam_rcoef_sex.pds = summary(bam_rcoef_sex.pds)
 # Save summary
 capture.output(summary_bam_rcoef_sex.pds, file = file.path(resdir, "summary_bam_rcoef_sex.pds.txt"))
 
-# Plot smooths
-draw(bam_rcoef_sex.pds, 
-     select = c("s(pds):sexF", "s(pds):sexM"), 
-     residuals = TRUE)
+gratia::smooths(bam_rcoef_sex.pds)
+
+## Plot smooths
+# 1. Create a data slice across pds for each level of sex_ord
+ds <- data_slice(bam_rcoef_sex.pds, pds = evenly(pds, n = 100), sex_ord = unique(sex_ord))
+
+# 2. Calculate the fitted values
+fv <- fitted_values(bam_rcoef_sex.pds, data = ds)
+
+# 3. Plot them cleanly
+ggplot(fv, aes(x = pds, y = .fitted, colour = sex_ord, fill = sex_ord)) +
+  geom_line(linewidth = 1) +
+  geom_ribbon(aes(ymin = .lower_ci, ymax = .upper_ci), alpha = 0.2, linewidth = 0) +
+  scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
+  scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
+  labs(y = "Partial Effect / Fit", x = "PDS", colour = "Sex", fill = "Sex") +
+  theme_minimal()
+
 
 # Check for adequate basis dimension and model fit 
 mgcv::k.check(bam_rcoef_sex.pds)
@@ -750,10 +774,21 @@ summary_bam_rcoef_sex.age = summary(bam_rcoef_sex.age)
 # Save summary
 capture.output(summary_bam_rcoef_sex.age, file = file.path(resdir, "summary_bam_rcoef_sex.age.txt"))
 
-# Plot smooths
-draw(bam_rcoef_sex.age, 
-     select = c("s(age):sexF", "s(age):sexM"), 
-     residuals = TRUE)
+## Plot smooths
+# 1. Create a data slice across pds for each level of sex_ord
+ds <- data_slice(bam_rcoef_sex.age, pds = evenly(pds, n = 100), sex_ord = unique(sex_ord))
+
+# 2. Calculate the fitted values
+fv <- fitted_values(bam_rcoef_sex.age, data = ds)
+
+# 3. Plot them cleanly
+ggplot(fv, aes(x = pds, y = .fitted, colour = sex_ord, fill = sex_ord)) +
+  geom_line(linewidth = 1) +
+  geom_ribbon(aes(ymin = .lower_ci, ymax = .upper_ci), alpha = 0.2, linewidth = 0) +
+  scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
+  scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
+  labs(y = "Partial Effect / Fit", x = "PDS", colour = "Sex", fill = "Sex") +
+  theme_minimal()
 
 # Check for adequate basis dimension and model fit 
 mgcv::k.check(bam_rcoef_sex.age)

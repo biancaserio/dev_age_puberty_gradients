@@ -57,7 +57,7 @@ rm(list = ls())
 #### set up directories
 codedir = dirname(getActiveDocumentContext()$path)  # get path to current script
 datadir = '/data/pt_02667/data/ABCD/'
-datadir_local = '/data/p_02667/development/data/'
+datadir_local = '/data/p_02667/development/data/pds_cleaned/'
 resdir = '/data/p_02667/development/results/network_dispersion/'
 resdir_fig = '/data/p_02667/development/results/network_dispersion/figures/'
 resdir_gd = '/data/p_02667/development/results/gd/'
@@ -79,11 +79,11 @@ setwd(codedir)
 mat_SA_expansion_metrics_baseline <- readMat(paste(datadir_local, 'SA_expansion_metrics_baseline_rm_outliers.mat', sep = ''))
 names(mat_SA_expansion_metrics_baseline)  # print contents of matfile
 
-SA_expansion_net_baseline <- mat_SA_expansion_metrics_baseline$SA.expansion.net.baseline  # shape: 1, 3950
-SA_expansion_net_baseline <- t(SA_expansion_net_baseline)  #transposing to get the shape: 3950, 1
+SA_expansion_net_baseline <- mat_SA_expansion_metrics_baseline$SA.expansion.net.baseline  # shape: 1, N
+SA_expansion_net_baseline <- t(SA_expansion_net_baseline)  #transposing to get the shape: N, 1
 
 # sub ID 
-sub_ID_baseline <- mat_SA_expansion_metrics_baseline$sub.ID.baseline   # shape: 3950, 1
+sub_ID_baseline <- mat_SA_expansion_metrics_baseline$sub.ID.baseline   # shape: N, 1
 
 dim(SA_expansion_net_baseline)
 dim(sub_ID_baseline)
@@ -93,11 +93,11 @@ dim(sub_ID_baseline)
 mat_SA_expansion_metrics_fu2y <- readMat(paste(datadir_local, 'SA_expansion_metrics_fu2y_rm_outliers.mat', sep = ''))
 names(mat_SA_expansion_metrics_fu2y)  # print contents of matfile
 
-SA_expansion_net_fu2y <- mat_SA_expansion_metrics_fu2y$SA.expansion.net.fu2y  # shape: 1, 1253
-SA_expansion_net_fu2y <- t(SA_expansion_net_fu2y)  #transposing to get the shape: 1253, 1
+SA_expansion_net_fu2y <- mat_SA_expansion_metrics_fu2y$SA.expansion.net.fu2y  # shape: 1, N
+SA_expansion_net_fu2y <- t(SA_expansion_net_fu2y)  #transposing to get the shape: N, 1
 
 # sub ID 
-sub_ID_fu2y <- mat_SA_expansion_metrics_fu2y$sub.ID.fu2y   # shape: 1253, 1
+sub_ID_fu2y <- mat_SA_expansion_metrics_fu2y$sub.ID.fu2y   # shape: N, 1
 
 dim(SA_expansion_net_fu2y)
 dim(sub_ID_fu2y)
@@ -107,11 +107,11 @@ dim(sub_ID_fu2y)
 mat_SA_expansion_metrics_fu4y <- readMat(paste(datadir_local, 'SA_expansion_metrics_fu4y_rm_outliers.mat', sep = ''))
 names(mat_SA_expansion_metrics_fu4y)  # print contents of matfile
 
-SA_expansion_net_fu4y <- mat_SA_expansion_metrics_fu4y$SA.expansion.net.fu4y  # shape: 1, 906
-SA_expansion_net_fu4y <- t(SA_expansion_net_fu4y)  #transposing to get the shape: 906, 1
+SA_expansion_net_fu4y <- mat_SA_expansion_metrics_fu4y$SA.expansion.net.fu4y  # shape: 1, N
+SA_expansion_net_fu4y <- t(SA_expansion_net_fu4y)  #transposing to get the shape: N, 1
 
 # sub ID 
-sub_ID_fu4y <- mat_SA_expansion_metrics_fu4y$sub.ID.fu4y   # shape: 906, 1
+sub_ID_fu4y <- mat_SA_expansion_metrics_fu4y$sub.ID.fu4y   # shape: N, 1
 
 dim(SA_expansion_net_fu4y)
 dim(sub_ID_fu4y)
@@ -144,32 +144,32 @@ dim(abcd_demo_fu4y)
 
 ## baseline
 # r coefs
-list_SA_axis_corr_to_ref_baseline <- mat_SA_expansion_metrics_baseline$list.SA.axis.corr.to.ref.baseline  # shape: 1, 3950
-list_SA_axis_corr_to_ref_baseline <- t(list_SA_axis_corr_to_ref_baseline)  #transposing to get the shape: 3950, 1
+list_SA_axis_corr_to_ref_baseline <- mat_SA_expansion_metrics_baseline$list.SA.axis.corr.to.ref.baseline  # shape: 1, N
+list_SA_axis_corr_to_ref_baseline <- t(list_SA_axis_corr_to_ref_baseline)  #transposing to get the shape: N, 1
 
 # gradient number corresponding to S-A axis
-list_SA_axis_grad_num_baseline <- mat_SA_expansion_metrics_baseline$list.SA.axis.grad.num.baseline  # shape: 1, 3950
-list_SA_axis_grad_num_baseline <- t(list_SA_axis_grad_num_baseline)  #transposing to get the shape: 3950, 1
+list_SA_axis_grad_num_baseline <- mat_SA_expansion_metrics_baseline$list.SA.axis.grad.num.baseline  # shape: 1, N
+list_SA_axis_grad_num_baseline <- t(list_SA_axis_grad_num_baseline)  #transposing to get the shape: N, 1
 
 
 ## 2y follow-up
 # r coefs
-list_SA_axis_corr_to_ref_fu2y <- mat_SA_expansion_metrics_fu2y$list.SA.axis.corr.to.ref.fu2y  # shape: 1, 1253
-list_SA_axis_corr_to_ref_fu2y <- t(list_SA_axis_corr_to_ref_fu2y)  #transposing to get the shape: 1253, 1
+list_SA_axis_corr_to_ref_fu2y <- mat_SA_expansion_metrics_fu2y$list.SA.axis.corr.to.ref.fu2y  # shape: 1, N
+list_SA_axis_corr_to_ref_fu2y <- t(list_SA_axis_corr_to_ref_fu2y)  #transposing to get the shape: N, 1
 
 # gradient number corresponding to S-A axis
-list_SA_axis_grad_num_fu2y <- mat_SA_expansion_metrics_fu2y$list.SA.axis.grad.num.fu2y  # shape: 1, 1253
-list_SA_axis_grad_num_fu2y <- t(list_SA_axis_grad_num_fu2y)  #transposing to get the shape: 1253, 1
+list_SA_axis_grad_num_fu2y <- mat_SA_expansion_metrics_fu2y$list.SA.axis.grad.num.fu2y  # shape: 1, N
+list_SA_axis_grad_num_fu2y <- t(list_SA_axis_grad_num_fu2y)  #transposing to get the shape: N, 1
 
 
 ## 4y follow-up
 # r coefs
-list_SA_axis_corr_to_ref_fu4y <- mat_SA_expansion_metrics_fu4y$list.SA.axis.corr.to.ref.fu4y  # shape: 1, 906
-list_SA_axis_corr_to_ref_fu4y <- t(list_SA_axis_corr_to_ref_fu4y)  #transposing to get the shape: 906, 1
+list_SA_axis_corr_to_ref_fu4y <- mat_SA_expansion_metrics_fu4y$list.SA.axis.corr.to.ref.fu4y  # shape: 1, N
+list_SA_axis_corr_to_ref_fu4y <- t(list_SA_axis_corr_to_ref_fu4y)  #transposing to get the shape: N, 1
 
 # gradient number corresponding to S-A axis
-list_SA_axis_grad_num_fu4y <- mat_SA_expansion_metrics_fu4y$list.SA.axis.grad.num.fu4y  # shape: 1, 906
-list_SA_axis_grad_num_fu4y <- t(list_SA_axis_grad_num_fu4y)  #transposing to get the shape: 906, 1
+list_SA_axis_grad_num_fu4y <- mat_SA_expansion_metrics_fu4y$list.SA.axis.grad.num.fu4y  # shape: 1, N
+list_SA_axis_grad_num_fu4y <- t(list_SA_axis_grad_num_fu4y)  #transposing to get the shape: N, 1
 
 
 
@@ -179,146 +179,146 @@ list_SA_axis_grad_num_fu4y <- t(list_SA_axis_grad_num_fu4y)  #transposing to get
 ## Baseline 
 
 # V
-V_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$V.mean.gd.baseline  # shape: 1, 3950
-V_mean_gd_baseline <- t(V_mean_gd_baseline)  #transposing to get the shape: 3950, 1
+V_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$V.mean.gd.baseline  # shape: 1, N
+V_mean_gd_baseline <- t(V_mean_gd_baseline)  #transposing to get the shape: N, 1
 
 # SM
-SM_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$SM.mean.gd.baseline  # shape: 1, 3950
-SM_mean_gd_baseline <- t(SM_mean_gd_baseline)  #transposing to get the shape: 3950, 1
+SM_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$SM.mean.gd.baseline  # shape: 1, N
+SM_mean_gd_baseline <- t(SM_mean_gd_baseline)  #transposing to get the shape: N, 1
 
 # DA
-DA_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$DA.mean.gd.baseline  # shape: 1, 3950
-DA_mean_gd_baseline <- t(DA_mean_gd_baseline)  #transposing to get the shape: 3950, 1
+DA_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$DA.mean.gd.baseline  # shape: 1, N
+DA_mean_gd_baseline <- t(DA_mean_gd_baseline)  #transposing to get the shape: N, 1
 
 # VA
-VA_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$VA.mean.gd.baseline  # shape: 1, 3950
-VA_mean_gd_baseline <- t(VA_mean_gd_baseline)  #transposing to get the shape: 3950, 1
+VA_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$VA.mean.gd.baseline  # shape: 1, N
+VA_mean_gd_baseline <- t(VA_mean_gd_baseline)  #transposing to get the shape: N, 1
 
 # L
-L_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$L.mean.gd.baseline  # shape: 1, 3950
-L_mean_gd_baseline <- t(L_mean_gd_baseline)  #transposing to get the shape: 3950, 1
+L_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$L.mean.gd.baseline  # shape: 1, N
+L_mean_gd_baseline <- t(L_mean_gd_baseline)  #transposing to get the shape: N, 1
 
 # FP
-FP_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$FP.mean.gd.baseline  # shape: 1, 3950
-FP_mean_gd_baseline <- t(FP_mean_gd_baseline)  #transposing to get the shape: 3950, 1
+FP_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$FP.mean.gd.baseline  # shape: 1, N
+FP_mean_gd_baseline <- t(FP_mean_gd_baseline)  #transposing to get the shape: N, 1
 
 # DMN
-DMN_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$DMN.mean.gd.baseline  # shape: 1, 3950
-DMN_mean_gd_baseline <- t(DMN_mean_gd_baseline)  #transposing to get the shape: 3950, 1
+DMN_mean_gd_baseline <- mat_SA_expansion_metrics_baseline$DMN.mean.gd.baseline  # shape: 1, N
+DMN_mean_gd_baseline <- t(DMN_mean_gd_baseline)  #transposing to get the shape: N, 1
 
 
 ## Parcel-level
 
-#mean_gd_top10_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.top10.baseline  # shape: 400, 3950
+#mean_gd_top10_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.top10.baseline  # shape: 400, N
 
 # short
-mean_gd_short_node_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.short.node.baseline  # shape: 1, 3950
-mean_gd_short_node_baseline <- t(mean_gd_short_node_baseline)  #transposing to get the shape: 3950, 1
+mean_gd_short_node_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.short.node.baseline  # shape: 1, N
+mean_gd_short_node_baseline <- t(mean_gd_short_node_baseline)  #transposing to get the shape: N, 1
 
 # medium
-mean_gd_medium_node_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.medium.node.baseline  # shape: 1, 3950
-mean_gd_medium_node_baseline <- t(mean_gd_medium_node_baseline)  #transposing to get the shape: 3950, 1
+mean_gd_medium_node_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.medium.node.baseline  # shape: 1, N
+mean_gd_medium_node_baseline <- t(mean_gd_medium_node_baseline)  #transposing to get the shape: N, 1
 
 # long
-mean_gd_long_node_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.long.node.baseline  # shape: 1, 3950
-mean_gd_long_node_baseline <- t(mean_gd_long_node_baseline)  #transposing to get the shape: 3950, 1
+mean_gd_long_node_baseline <- mat_SA_expansion_metrics_baseline$mean.gd.long.node.baseline  # shape: 1, N
+mean_gd_long_node_baseline <- t(mean_gd_long_node_baseline)  #transposing to get the shape: N, 1
 
 
 
 ## Fu2y 
 
 # V
-V_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$V.mean.gd.fu2y  # shape: 1, 1253
-V_mean_gd_fu2y <- t(V_mean_gd_fu2y)  #transposing to get the shape: 1253, 1
+V_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$V.mean.gd.fu2y  # shape: 1, N
+V_mean_gd_fu2y <- t(V_mean_gd_fu2y)  #transposing to get the shape: N, 1
 
 # SM
-SM_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$SM.mean.gd.fu2y  # shape: 1, 1253
-SM_mean_gd_fu2y <- t(SM_mean_gd_fu2y)  #transposing to get the shape: 1253, 1
+SM_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$SM.mean.gd.fu2y  # shape: 1, N
+SM_mean_gd_fu2y <- t(SM_mean_gd_fu2y)  #transposing to get the shape: N, 1
 
 # DA
-DA_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$DA.mean.gd.fu2y  # shape: 1, 1253
-DA_mean_gd_fu2y <- t(DA_mean_gd_fu2y)  #transposing to get the shape: 1253, 1
+DA_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$DA.mean.gd.fu2y  # shape: 1, N
+DA_mean_gd_fu2y <- t(DA_mean_gd_fu2y)  #transposing to get the shape: N, 1
 
 # VA
-VA_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$VA.mean.gd.fu2y  # shape: 1, 1253
-VA_mean_gd_fu2y <- t(VA_mean_gd_fu2y)  #transposing to get the shape: 1253, 1
+VA_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$VA.mean.gd.fu2y  # shape: 1, N
+VA_mean_gd_fu2y <- t(VA_mean_gd_fu2y)  #transposing to get the shape: N, 1
 
 # L
-L_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$L.mean.gd.fu2y  # shape: 1, 1253
-L_mean_gd_fu2y <- t(L_mean_gd_fu2y)  #transposing to get the shape: 1253, 1
+L_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$L.mean.gd.fu2y  # shape: 1, N
+L_mean_gd_fu2y <- t(L_mean_gd_fu2y)  #transposing to get the shape: N, 1
 
 # FP
-FP_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$FP.mean.gd.fu2y  # shape: 1, 1253
-FP_mean_gd_fu2y <- t(FP_mean_gd_fu2y)  #transposing to get the shape: 1253, 1
+FP_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$FP.mean.gd.fu2y  # shape: 1, N
+FP_mean_gd_fu2y <- t(FP_mean_gd_fu2y)  #transposing to get the shape: N, 1
 
 # DMN
-DMN_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$DMN.mean.gd.fu2y  # shape: 1, 1253
-DMN_mean_gd_fu2y <- t(DMN_mean_gd_fu2y)  #transposing to get the shape: 1253, 1
+DMN_mean_gd_fu2y <- mat_SA_expansion_metrics_fu2y$DMN.mean.gd.fu2y  # shape: 1, N
+DMN_mean_gd_fu2y <- t(DMN_mean_gd_fu2y)  #transposing to get the shape: N, 1
 
 
 ## Parcel-level
 
-#mean_gd_top10_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.top10.fu2y  # shape: 1253, 400
+#mean_gd_top10_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.top10.fu2y  # shape: N, 400
 
 # short
-mean_gd_short_node_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.short.node.fu2y  # shape: 1, 1253
-mean_gd_short_node_fu2y <- t(mean_gd_short_node_fu2y)  #transposing to get the shape: 1253, 1
+mean_gd_short_node_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.short.node.fu2y  # shape: 1, N
+mean_gd_short_node_fu2y <- t(mean_gd_short_node_fu2y)  #transposing to get the shape: N, 1
 
 # medium
-mean_gd_medium_node_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.medium.node.fu2y  # shape: 1, 1253
-mean_gd_medium_node_fu2y <- t(mean_gd_medium_node_fu2y)  #transposing to get the shape: 1253, 1
+mean_gd_medium_node_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.medium.node.fu2y  # shape: 1, N
+mean_gd_medium_node_fu2y <- t(mean_gd_medium_node_fu2y)  #transposing to get the shape: N, 1
 
 # long
-mean_gd_long_node_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.long.node.fu2y  # shape: 1, 1253
-mean_gd_long_node_fu2y <- t(mean_gd_long_node_fu2y)  #transposing to get the shape: 1253, 1
+mean_gd_long_node_fu2y <- mat_SA_expansion_metrics_fu2y$mean.gd.long.node.fu2y  # shape: 1, N
+mean_gd_long_node_fu2y <- t(mean_gd_long_node_fu2y)  #transposing to get the shape: N, 1
 
 
 ## Fu4y 
 
 # V
-V_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$V.mean.gd.fu4y  # shape: 1, 906
-V_mean_gd_fu4y <- t(V_mean_gd_fu4y)  #transposing to get the shape: 906, 1
+V_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$V.mean.gd.fu4y  # shape: 1, N
+V_mean_gd_fu4y <- t(V_mean_gd_fu4y)  #transposing to get the shape: N, 1
 
 # SM
-SM_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$SM.mean.gd.fu4y  # shape: 1, 906
-SM_mean_gd_fu4y <- t(SM_mean_gd_fu4y)  #transposing to get the shape: 906, 1
+SM_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$SM.mean.gd.fu4y  # shape: 1, N
+SM_mean_gd_fu4y <- t(SM_mean_gd_fu4y)  #transposing to get the shape: N, 1
 
 # DA
-DA_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$DA.mean.gd.fu4y  # shape: 1, 906
-DA_mean_gd_fu4y <- t(DA_mean_gd_fu4y)  #transposing to get the shape: 906, 1
+DA_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$DA.mean.gd.fu4y  # shape: 1, N
+DA_mean_gd_fu4y <- t(DA_mean_gd_fu4y)  #transposing to get the shape: N, 1
 
 # VA
-VA_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$VA.mean.gd.fu4y  # shape: 1, 906
-VA_mean_gd_fu4y <- t(VA_mean_gd_fu4y)  #transposing to get the shape: 906, 1
+VA_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$VA.mean.gd.fu4y  # shape: 1, N
+VA_mean_gd_fu4y <- t(VA_mean_gd_fu4y)  #transposing to get the shape: N, 1
 
 # L
-L_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$L.mean.gd.fu4y  # shape: 1, 906
-L_mean_gd_fu4y <- t(L_mean_gd_fu4y)  #transposing to get the shape: 906, 1
+L_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$L.mean.gd.fu4y  # shape: 1, N
+L_mean_gd_fu4y <- t(L_mean_gd_fu4y)  #transposing to get the shape: N, 1
 
 # FP
-FP_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$FP.mean.gd.fu4y  # shape: 1, 906
-FP_mean_gd_fu4y <- t(FP_mean_gd_fu4y)  #transposing to get the shape: 906, 1
+FP_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$FP.mean.gd.fu4y  # shape: 1, N
+FP_mean_gd_fu4y <- t(FP_mean_gd_fu4y)  #transposing to get the shape: N, 1
 
 # DMN
-DMN_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$DMN.mean.gd.fu4y  # shape: 1, 906
-DMN_mean_gd_fu4y <- t(DMN_mean_gd_fu4y)  #transposing to get the shape: 906, 1
+DMN_mean_gd_fu4y <- mat_SA_expansion_metrics_fu4y$DMN.mean.gd.fu4y  # shape: 1, N
+DMN_mean_gd_fu4y <- t(DMN_mean_gd_fu4y)  #transposing to get the shape: N, 1
 
 
 ## Parcel-level
 
-#mean_gd_top10_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.top10.fu4y  # shape: 906, 400
+#mean_gd_top10_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.top10.fu4y  # shape: N, 400
 
 # short
-mean_gd_short_node_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.short.node.fu4y  # shape: 1, 906
-mean_gd_short_node_fu4y <- t(mean_gd_short_node_fu4y)  #transposing to get the shape: 906, 1
+mean_gd_short_node_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.short.node.fu4y  # shape: 1, N
+mean_gd_short_node_fu4y <- t(mean_gd_short_node_fu4y)  #transposing to get the shape: N, 1
 
 # medium
-mean_gd_medium_node_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.medium.node.fu4y  # shape: 1, 906
-mean_gd_medium_node_fu4y <- t(mean_gd_medium_node_fu4y)  #transposing to get the shape: 906, 1
+mean_gd_medium_node_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.medium.node.fu4y  # shape: 1, N
+mean_gd_medium_node_fu4y <- t(mean_gd_medium_node_fu4y)  #transposing to get the shape: N, 1
 
 # long
-mean_gd_long_node_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.long.node.fu4y  # shape: 1, 906
-mean_gd_long_node_fu4y <- t(mean_gd_long_node_fu4y)  #transposing to get the shape: 906, 1
+mean_gd_long_node_fu4y <- mat_SA_expansion_metrics_fu4y$mean.gd.long.node.fu4y  # shape: 1, N
+mean_gd_long_node_fu4y <- t(mean_gd_long_node_fu4y)  #transposing to get the shape: N, 1
 
 
 
@@ -368,7 +368,9 @@ str(list_SA_axis_corr_to_ref_long)
 ## S-A axis gradient numbers (for grad_flip)
 list_SA_axis_grad_num_long = c(list_SA_axis_grad_num_baseline, list_SA_axis_grad_num_fu2y, list_SA_axis_grad_num_fu4y)
 
+
 str(list_SA_axis_grad_num_long)
+
 
 
 ## Geodesic Distances
@@ -562,6 +564,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on S-A axis expansion",
@@ -648,6 +655,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
 
@@ -870,6 +882,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on similarity to adult S-A axis\n(Δ Fisher z)",
@@ -1002,6 +1019,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -1174,6 +1196,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on gradient flip (log-odds)",
@@ -1301,6 +1328,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -1646,7 +1678,7 @@ network_colors <- c(
   "SM" = "steelblue",
   "DA" = "forestgreen",
   "VA" = "orchid",
-  "L" = "lemonchiffon",
+  "L" = "lightgoldenrod1",  # officially should be lemonchiffon but not visible enough
   "FP" = "orange",
   "DMN" = "indianred"
 )
@@ -1695,6 +1727,11 @@ plot_smes_age_all <- ggplot(df_age_all, aes(x = age, y = .estimate, color = Netw
   #geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
   #alpha = 0.15, color = NA) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = network_colors) +
   scale_fill_manual(values = network_colors) +
   labs(
@@ -1805,6 +1842,11 @@ plot_smes_age_all_sig <- ggplot(df_age_all_sig, aes(x = age, y = .estimate, colo
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
   alpha = 0.15, color = NA) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = network_colors) +
   scale_fill_manual(values = network_colors) +
   labs(
@@ -1829,7 +1871,7 @@ plot_smes_age_all_sig
 network_order_sig_pds <- c(
   #"V", 
   "SM", 
-  #"DA", 
+  "DA", 
   "VA", 
   "L", 
   "FP", 
@@ -1840,7 +1882,7 @@ network_order_sig_pds <- c(
 df_pds_all_sig <- bind_rows(
   #df_bam_GD_V_pds  %>% mutate(Network = "V"),
   df_bam_GD_SM_pds %>% mutate(Network = "SM"),
-  #df_bam_GD_DA_pds %>% mutate(Network = "DA"),
+  df_bam_GD_DA_pds %>% mutate(Network = "DA"),
   df_bam_GD_VA_pds %>% mutate(Network = "VA"),
   df_bam_GD_L_pds  %>% mutate(Network = "L"),
   df_bam_GD_FP_pds %>% mutate(Network = "FP"),
@@ -1871,8 +1913,8 @@ plot_smes_pds_all_sig <- ggplot(df_pds_all_sig, aes(x = pds, y = .estimate, colo
 plot_smes_pds_all_sig
 
 # before saving decide if you want with or without CIs (and remove or add "_CIs" accordingly)
-#ggsave(paste(resdir_gd_fig, 'bam_smes_age_on_GD_per_network_all_sig_rm_outliers_CIs.svg', sep = ''), plot = plot_smes_age_all_sig, width = 6, height = 5, dpi = 300)
-#ggsave(paste(resdir_gd_fig, 'bam_smes_pds_on_GD_per_network_all_sig_rm_outliers_CIs.svg', sep = ''), plot = plot_smes_pds_all_sig, width = 6, height = 5, dpi = 300)
+ggsave(paste(resdir_gd_fig, 'bam_smes_age_on_GD_per_network_all_sig_rm_outliers_CIs.svg', sep = ''), plot = plot_smes_age_all_sig, width = 6, height = 5, dpi = 300)
+ggsave(paste(resdir_gd_fig, 'bam_smes_pds_on_GD_per_network_all_sig_rm_outliers_CIs.svg', sep = ''), plot = plot_smes_pds_all_sig, width = 6, height = 5, dpi = 300)
 
 
 # To harmonize y-axes: Apply ylim to plots
@@ -1979,6 +2021,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -2056,6 +2103,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -2132,6 +2184,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -2208,6 +2265,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -2284,6 +2346,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -2360,6 +2427,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -2436,6 +2508,11 @@ plot_margtraj_age <- ggplot(
     color = NA
   ) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   scale_fill_manual(values = c("F" = "indianred3", "M" = "lightblue3")) + #, labels = c("F" = "Female", "M" = "Male")) +
   
@@ -2543,7 +2620,7 @@ network_colors <- c(
   "SM" = "steelblue",
   "DA" = "forestgreen",
   "VA" = "orchid",
-  "L" = "lemonchiffon",
+  "L" = "lightgoldenrod1",  # officially should be lemonchiffon but not visible enough
   "FP" = "orange",
   "DMN" = "indianred"
 )
@@ -2611,6 +2688,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on S-A axis expansion",
@@ -3239,6 +3321,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on S-A axis expansion",
@@ -3571,6 +3658,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on S-A axis expansion",

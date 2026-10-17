@@ -45,7 +45,7 @@ rm(list = ls())
 #### set up directories
 codedir = dirname(getActiveDocumentContext()$path)  # get path to current script
 datadir = '/data/pt_02667/data/ABCD/'
-datadir_local = '/data/p_02667/development/data/'
+datadir_local = '/data/p_02667/development/data/pds_cleaned/'
 resdir = '/data/p_02667/development/results/supplementary/fc/SA_bin/'
 resdir_fig = '/data/p_02667/development/results/supplementary/fc/SA_bin/figures/'
 
@@ -703,6 +703,11 @@ plot_smes_age_all <- ggplot(df_age_all, aes(x = age, y = .estimate, color = Bin,
   #geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
   #alpha = 0.15, color = NA) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = bin_colors) +
   scale_fill_manual(values = bin_colors) +
   labs(
@@ -824,6 +829,11 @@ plot_smes_age_all_sig <- ggplot(df_age_all_sig, aes(x = age, y = .estimate, colo
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               alpha = 0.15, color = NA) +
   geom_line(linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   scale_color_manual(values = bin_colors) +
   scale_fill_manual(values = bin_colors) +
   labs(
@@ -1065,6 +1075,11 @@ plot_smes_age = ggplot(df_age, aes(x = age, y = .estimate)) +
   geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
               fill = "honeydew3", alpha = 0.25) +
   geom_line(color = "honeydew4", linewidth = 1.2) +
+  scale_x_continuous(
+    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
+    limits = c(106, 190),
+    expand = expansion(mult = 0)
+  ) +
   labs(
     x = "Age (in months)",
     y = "Partial effect on S-A axis expansion",
