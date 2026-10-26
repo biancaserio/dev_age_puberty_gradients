@@ -24,6 +24,7 @@ Bianca Serio, Lars Dinkelbach, Mylla Marsiglia, Laura Waite, Felix Hoffstaedter,
 - `p3_cleaning_covariates.ipynb` cleans covariates to feed to p3_cleaning_final_sample.py
 - `p3_cleaning_final_sample.py` gets final sample based on shared data availability (as reported in data trees)
 
+
 **2. Main analyses**
 - `p3_main.ipynb` computes S-A axis and features of S-A axis development, plotting Figures 1 & 2, FC strength computation
 - `p3_SAexpansion_outlier_removal.ipynb` computes S-A axis expansion computation, outlier removal, plotting Figures 3 & 4
@@ -32,6 +33,8 @@ Bianca Serio, Lars Dinkelbach, Mylla Marsiglia, Laura Waite, Felix Hoffstaedter,
 - `p3_bam_gradflip.R` BAM analysis - gradient flip
 - `p3_bam_SA_expansion_net_gd_rm_outliers.R` BAM analysis - S-A axis expansion (network-level, removed outliers)
 
+
+**3. Supplementary analyses**
 - `p3_supplementary_bam_rcoef_gradflip_relationship.R` BAM analysis - supplementary - relationship between similarity to adult S-A axis and gradient flip
 - `p3_supplementary_bam_FC.R` BAM analysis - supplementary - FC strength by network
 - `p3_supplementary_bam_FC_SA_bin.R` BAM analysis - supplementary - FC strength by S-A axis bin
@@ -45,9 +48,18 @@ Bianca Serio, Lars Dinkelbach, Mylla Marsiglia, Laura Waite, Felix Hoffstaedter,
 - `p3_sensitivity_bam_rcoef_SES.R` BAM analysis - sensitivity - SES as covariate on similarity to adult S-A axis
 - `p3_sensitivity_bam_gradflip_SES.R` BAM analysis - sensitivity - SES as covariate on gradient flip
 - `p3_sensitivity_bam_SA_expansion_net_gd_rm_outliers_SES.R` BAM analysis - sensitivity - SES as covariate on S-A axis expansion (network-level, removed outliers)
+- `p3_sensitivity_bam_rcoef_sex_spec.R` BAM analysis - sensitivity - sex specific models
+- `p3_sensitivity_bam_gradflip_sex_spec.R` BAM analysis - sensitivity - sex specific models
+
+- `p3_main_supp_longitudinal_sample.ipynb` computes S-A axis and features of S-A axis development - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
+- `p3_compute_mean_gd_supp_longitudinal_sample.ipynb` computes mean geodesic distances at the subject level based on fixed Schaefer-400 template distances - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
+- `p3_SAexpansion_outlier_removal_supp_longitudinal_sample.ipynb` computes S-A axis expansion computation, outlier removal - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
+- `p3_bam_rcoef_supp_longitudinal_sample.R` BAM analysis - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
+- `p3_bam_gradflip_supp_longitudinal_sample.R` BAM analysis - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
+- `p3_bam_SA_expansion_net_gd_rm_outliers_supp_longitudinal_sample.R` BAM analysis - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
 
 
-**3. Functions**
+**4. Functions**
 - `p3_myfunctions.ipynb` contains functions used for main analyses
 
 
