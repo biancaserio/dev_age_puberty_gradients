@@ -1376,9 +1376,9 @@ plot_smes_age_all_sig
 
 # Define your desired order
 network_order_sig_pds <- c(
-  "V", 
+  #"V", 
   "SM", 
-  #"DA", 
+  "DA", 
   "VA", 
   #"L", 
   "FP", 
@@ -1387,9 +1387,9 @@ network_order_sig_pds <- c(
 
 # Combine all smooth estimate data frames into one
 df_pds_all_sig <- bind_rows(
-  df_bam_GD_V_pds  %>% mutate(Network = "V"),
+  #df_bam_GD_V_pds  %>% mutate(Network = "V"),
   df_bam_GD_SM_pds %>% mutate(Network = "SM"),
-  #df_bam_GD_DA_pds %>% mutate(Network = "DA"),
+  df_bam_GD_DA_pds %>% mutate(Network = "DA"),
   df_bam_GD_VA_pds %>% mutate(Network = "VA"),
   #df_bam_GD_L_pds  %>% mutate(Network = "L"),
   df_bam_GD_FP_pds %>% mutate(Network = "FP"),

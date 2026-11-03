@@ -795,12 +795,12 @@ ggsave(paste(resdir_fig, 'bam_smes_panel_ageEpds_on_FC_per_network_all_rm_outlie
 # Define your desired order (to comment out)
 bin_order_sig_age <- c(
   "bin1",
-  "bin2", 
+  "bin2" 
   #"bin3", 
   #"bin4", 
   #"bin5", 
   #"bin6", 
-  "bin7"
+  #"bin7"
   #"bin8", 
   #"bin9",
   #"bin10"
@@ -810,12 +810,12 @@ bin_order_sig_age <- c(
 # Combine and set factor levels (to comment out)
 df_age_all_sig <- bind_rows(
   df_bam_FC_bin1_age  %>% mutate(Bin = "bin1"),
-  df_bam_FC_bin2_age  %>% mutate(Bin = "bin2"),
+  df_bam_FC_bin2_age  %>% mutate(Bin = "bin2")
   #df_bam_FC_bin3_age  %>% mutate(Bin = "bin3"),
   #df_bam_FC_bin4_age  %>% mutate(Bin = "bin4"),
   #df_bam_FC_bin5_age  %>% mutate(Bin = "bin5"),
   #df_bam_FC_bin6_age  %>% mutate(Bin = "bin6"),
-  df_bam_FC_bin7_age  %>% mutate(Bin = "bin7")
+  #df_bam_FC_bin7_age  %>% mutate(Bin = "bin7")
   #df_bam_FC_bin8_age  %>% mutate(Bin = "bin8"),
   #df_bam_FC_bin9_age  %>% mutate(Bin = "bin9"),
   #df_bam_FC_bin10_age  %>% mutate(Bin = "bin10")
@@ -860,10 +860,10 @@ bin_order_sig_pds <- c(
   #"bin2", 
   #"bin3", 
   #"bin4", 
-  "bin5"
+  "bin5",
   #"bin6", 
   #"bin7", 
-  #"bin8", 
+  "bin8"
   #"bin9",
   #"bin10"
   )
@@ -875,10 +875,10 @@ df_pds_all_sig <- bind_rows(
   #df_bam_FC_bin2_pds  %>% mutate(Bin = "bin2"),
   #df_bam_FC_bin3_pds  %>% mutate(Bin = "bin3"),
   #df_bam_FC_bin4_pds  %>% mutate(Bin = "bin4"),
-  df_bam_FC_bin5_pds  %>% mutate(Bin = "bin5")
+  df_bam_FC_bin5_pds  %>% mutate(Bin = "bin5"),
   #df_bam_FC_bin6_pds  %>% mutate(Bin = "bin6"),
   #df_bam_FC_bin7_pds  %>% mutate(Bin = "bin7"),
-  #df_bam_FC_bin8_pds  %>% mutate(Bin = "bin8"),
+  df_bam_FC_bin8_pds  %>% mutate(Bin = "bin8")
   #df_bam_FC_bin9_pds  %>% mutate(Bin = "bin9"),
   #df_bam_FC_bin10_pds  %>% mutate(Bin = "bin10")
 ) %>%

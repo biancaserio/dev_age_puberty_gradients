@@ -1276,11 +1276,6 @@ plot_smes_pds_all <- ggplot(df_pds_all, aes(x = pds, y = .estimate, color = Netw
   #geom_ribbon(aes(ymin = .estimate - 2 * .se, ymax = .estimate + 2 * .se),
   #alpha = 0.15, color = NA) +
   geom_line(linewidth = 1.2) +
-  scale_x_continuous(
-    breaks = seq(108, 192, by = 12),          # ticks show 9 to 15 years - in 12 months
-    limits = c(106, 190),
-    expand = expansion(mult = 0)
-  ) +
   scale_color_manual(values = network_colors) +
   scale_fill_manual(values = network_colors) +
   labs(

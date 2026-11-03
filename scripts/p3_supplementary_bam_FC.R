@@ -669,7 +669,7 @@ ggsave(paste(resdir_fig, 'bam_smes_panel_ageEpds_on_FC_per_network_all_rm_outlie
 # Define your desired order
 network_order_sig_age <- c(
   #"V", 
-  #"SM", 
+  "SM", 
   #"DA", 
   #"VA", 
   "L" 
@@ -681,7 +681,7 @@ network_order_sig_age <- c(
 # Combine and set factor levels
 df_age_all_sig <- bind_rows(
   #df_bam_FC_V_age  %>% mutate(Network = "V"),
-  #df_bam_FC_SM_age %>% mutate(Network = "SM"),
+  df_bam_FC_SM_age %>% mutate(Network = "SM"),
   #df_bam_FC_DA_age %>% mutate(Network = "DA"),
   #df_bam_FC_VA_age %>% mutate(Network = "VA"),
   df_bam_FC_L_age  %>% mutate(Network = "L"),
@@ -724,7 +724,7 @@ plot_smes_age_all_sig
 # Define your desired order
 network_order_sig_pds <- c(
   #"V", 
-  #"SM", 
+  "SM", 
   #"DA", 
   #"VA", 
   #"L", 
@@ -735,7 +735,7 @@ network_order_sig_pds <- c(
 # Combine all smooth estimate data frames into one
 df_pds_all_sig <- bind_rows(
   #df_bam_FC_V_pds  %>% mutate(Network = "V"),
-  #df_bam_FC_SM_pds %>% mutate(Network = "SM"),
+  df_bam_FC_SM_pds %>% mutate(Network = "SM"),
   #df_bam_FC_DA_pds %>% mutate(Network = "DA"),
   #df_bam_FC_VA_pds %>% mutate(Network = "VA"),
   #df_bam_FC_L_pds  %>% mutate(Network = "L")

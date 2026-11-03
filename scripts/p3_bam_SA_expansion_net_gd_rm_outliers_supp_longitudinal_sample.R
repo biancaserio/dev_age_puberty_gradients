@@ -1688,9 +1688,9 @@ network_order_sig_age <- c(
   "V", 
   "SM", 
   #"DA", 
-  "VA" 
+  #"VA",
   #"L", 
-  #"FP", 
+  "FP"
   #"DMN"
 )
 
@@ -1700,9 +1700,9 @@ df_age_all_sig <- bind_rows(
   df_bam_GD_V_age  %>% mutate(Network = "V"),
   df_bam_GD_SM_age %>% mutate(Network = "SM"),
   #df_bam_GD_DA_age %>% mutate(Network = "DA"),
-  df_bam_GD_VA_age %>% mutate(Network = "VA"),
+  #df_bam_GD_VA_age %>% mutate(Network = "VA"),
   #df_bam_GD_L_age  %>% mutate(Network = "L"),
-  #df_bam_GD_FP_age %>% mutate(Network = "FP"),
+  df_bam_GD_FP_age %>% mutate(Network = "FP")
   #df_bam_GD_DMN_age %>% mutate(Network = "DMN")
 ) %>%
   mutate(Network = factor(Network, levels = network_order_sig_age))  # <-- set legend order here
@@ -1741,7 +1741,7 @@ plot_smes_age_all_sig
 # Define your desired order
 network_order_sig_pds <- c(
   #"V", 
-  "SM", 
+  #"SM", 
   "DA", 
   "VA", 
   "L", 
@@ -1752,7 +1752,7 @@ network_order_sig_pds <- c(
 # Combine all smooth estimate data frames into one
 df_pds_all_sig <- bind_rows(
   #df_bam_GD_V_pds  %>% mutate(Network = "V"),
-  df_bam_GD_SM_pds %>% mutate(Network = "SM"),
+  #df_bam_GD_SM_pds %>% mutate(Network = "SM"),
   df_bam_GD_DA_pds %>% mutate(Network = "DA"),
   df_bam_GD_VA_pds %>% mutate(Network = "VA"),
   df_bam_GD_L_pds  %>% mutate(Network = "L"),
