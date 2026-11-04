@@ -559,6 +559,9 @@ plot_margtraj_panel <- (plot_margtraj_age + patchwork::plot_spacer() + plot_marg
 
 ggsave(paste(resdir_fig, 'bam_margtraj_panel_main_leg1_ageEpds_on_SAexp_rm_outliers.svg', sep = ''), plot = plot_margtraj_panel, width = 11, height = 5, dpi = 300)
 
+
+
+
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1098,3 +1101,146 @@ plot_margtraj_pds <- ggplot(
   theme(axis.text = element_text(color = "black"))
 
 ggsave(paste(resdir_fig, 'bam_margtraj_leg2_pds_on_gradflip_rm_outliers.svg', sep = ''), plot = plot_margtraj_pds, width = 6, height = 5, dpi = 300)
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# interaction models
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#### LEG 1
+
+### Model including sex*pds interaction
+
+# Convert sex to ordered factor (to obtain one p value for the interaction instead of deviations from the interaction)
+covar_df$sex_ord <- as.ordered(covar_df$sex)
+
+### Note: different ways to model
+# s(pds, by = sex_ord, k = 10, fx = FALSE) (+ main effects): one line output for significance of interaction
+# s(pds, by = sex, k = 10, fx = FALSE) (+ main effects): separate smooth for each sex showing deviation from main effect
+# s(pds, by = sex, k = 10, fx = FALSE) (not including main effects): separate smooth for each sex -> testing main effect separately by sex
+
+
+bam_SA_exp_leg1_sex.pds <- bam(
+  SA_expansion_node_long ~
+    sex_ord +
+    s(age, k = 10, fx = FALSE) +  # default
+    s(pds, k = 10, fx = FALSE) +  # default
+    s(pds, by = sex_ord, k = 10, fx = FALSE) + # default, one line output for significance of interaction
+    tot_SA +
+    s(site_id, bs = "re") +
+    s(site.family, bs = "re") +
+    s(site.family.subject, bs = "re"),
+  data = covar_df,
+  method = "fREML",
+  nthreads = 36,
+  discrete = TRUE,  # key for speed/memory with large n
+  select = TRUE            # allows automatic penalization of unneeded terms
+)
+
+summary_bam_SA_exp_leg1_sex.pds_rm_outliers = summary(bam_SA_exp_leg1_sex.pds)
+
+# Save summary
+capture.output(summary_bam_SA_exp_leg1_sex.pds_rm_outliers, file = file.path(resdir, "summary_bam_SA_exp_leg1_sex.pds_rm_outliers.txt"))
+
+# Check for adequate basis dimension and model fit
+mgcv::k.check(bam_SA_exp_leg1_sex.pds)
+
+
+### Model including sex*age interaction
+
+bam_SA_exp_leg1_sex.age <- bam(
+  SA_expansion_node_long ~
+    sex_ord +
+    s(age, k = 10, fx = FALSE) +  # default
+    s(pds, k = 10, fx = FALSE) +  # default
+    s(age, by = sex_ord, k = 10, fx = FALSE) + # default, one line output for significance of interaction
+    tot_SA +
+    s(site_id, bs = "re") +
+    s(site.family, bs = "re") +
+    s(site.family.subject, bs = "re"),
+  data = covar_df,
+  method = "fREML",
+  nthreads = 36,
+  discrete = TRUE,  # key for speed/memory with large n
+  select = TRUE            # allows automatic penalization of unneeded terms
+)
+
+summary_bam_SA_exp_leg1_sex.age_rm_outliers = summary(bam_SA_exp_leg1_sex.age)
+
+# Save summary
+capture.output(summary_bam_SA_exp_leg1_sex.age_rm_outliers, file = file.path(resdir, "summary_bam_SA_exp_leg1_sex.age_rm_outliers.txt"))
+
+# Check for adequate basis dimension and model fit
+mgcv::k.check(bam_SA_exp_leg1_sex.age)
+
+
+
+
+#### LEG 2
+
+### rcoef: Model including sex*SAexp interaction
+
+bam_SA_exp_leg2_rcoef_sex.SAexp <- bam(
+  list_SA_axis_corr_to_ref_long_z ~
+    sex_ord +
+    s(age, k = 10, fx = FALSE) +  # default
+    s(pds, k = 10, fx = FALSE) +  # default
+    s(SA_expansion_node_long, k = 10, fx = FALSE) +  # default
+    s(SA_expansion_node_long, by = sex_ord, k = 10, fx = FALSE) + # default, one line output for significance of interaction
+    tot_SA +
+    s(site_id, bs = "re") +
+    s(site.family, bs = "re") +
+    s(site.family.subject, bs = "re"),
+  data = covar_df,
+  method = "fREML",
+  nthreads = 36,
+  discrete = TRUE,  # key for speed/memory with large n
+  select = TRUE            # allows automatic penalization of unneeded terms
+)
+
+summary_bam_SA_exp_leg2_rcoef_sex.SAexp_rm_outliers = summary(bam_SA_exp_leg2_rcoef_sex.SAexp)
+
+# Save summary
+capture.output(summary_bam_SA_exp_leg2_rcoef_sex.SAexp_rm_outliers, file = file.path(resdir, "summary_bam_SA_exp_leg2_rcoef_sex.SAexp_rm_outliers.txt"))
+
+# Check for adequate basis dimension and model fit
+mgcv::k.check(bam_SA_exp_leg2_rcoef_sex.SAexp)
+
+
+
+
+### gradflip: Model including sex*SAexp interaction
+
+
+bam_SA_exp_leg2_gradflip_sex.SAexp <- bam(
+  grad_flip ~ 
+    sex_ord +
+    s(age, k = 10, fx = FALSE) +  # default (including age because -although it wasnt a significant predictor in gradflip main analysis- it was for M)
+    s(pds, k = 10, fx = FALSE) +  # default
+    s(SA_expansion_node_long, k = 10, fx = FALSE) +  # default
+    s(SA_expansion_node_long, by = sex_ord, k = 10, fx = FALSE) + # default, one line output for significance of interaction
+    tot_SA +
+    s(site_id, bs = "re") +
+    s(site.family, bs = "re") +
+    s(site.family.subject, bs = "re"),
+  data = covar_df,
+  family = binomial(link = "logit"),
+  discrete = TRUE,        # big speed-up for large datasets
+  method = "fREML",        # recommended for models with random effects
+  nthreads = 36,            # number of cores for parallel computation -> can also try: parallel::detectCores()
+  select = TRUE            # allows automatic penalization of unneeded terms
+)
+
+summary_bam_SA_exp_leg2_gradflip_sex.SAexp_rm_outliers = summary(bam_SA_exp_leg2_gradflip_sex.SAexp)
+
+# Save summary
+capture.output(summary_bam_SA_exp_leg2_gradflip_sex.SAexp_rm_outliers, file = file.path(resdir, "summary_bam_SA_exp_leg2_gradflip_sex.SAexp_rm_outliers.txt"))
+
+# Check for adequate basis dimension and model fit
+mgcv::k.check(bam_SA_exp_leg2_gradflip_sex.SAexp)
+
+
+

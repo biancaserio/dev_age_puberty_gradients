@@ -1013,7 +1013,7 @@ bin_order <- c("bin1", "bin2", "bin3", "bin4", "bin5", "bin6", "bin7", "bin8", "
 df_age <- smooth_estimates(bam_SA_exp_FCs_all_bin, select = "s(age)")
 df_pds <- smooth_estimates(bam_SA_exp_FCs_all_bin, select = "s(pds)")
 
-df_bin1 <- smooth_estimates(bam_SA_exp_FCs_all_bin, select = "s(bin1_mean_FC_long)")
+#df_bin1 <- smooth_estimates(bam_SA_exp_FCs_all_bin, select = "s(bin1_mean_FC_long)")
 df_bin2 <- smooth_estimates(bam_SA_exp_FCs_all_bin, select = "s(bin2_mean_FC_long)")
 df_bin3 <- smooth_estimates(bam_SA_exp_FCs_all_bin, select = "s(bin3_mean_FC_long)")
 df_bin4 <- smooth_estimates(bam_SA_exp_FCs_all_bin, select = "s(bin4_mean_FC_long)")
@@ -1066,7 +1066,8 @@ plot_smes_all_bin
 
 
 # before saving decide if you want with or without CIs (and remove or add "_CIs" accordingly)
-ggsave(paste(resdir_fig, 'bam_smes_all_bins_FCs_on_SAexp_rm_outliers_CIs.svg', sep = ''), plot = plot_smes_all_bin, width = 6, height = 5, dpi = 300)
+ggsave(paste(resdir_fig, 'bam_smes_bins_FCs_on_SAexp_rm_outliers_all_sig_CIs.svg', sep = ''), plot = plot_smes_all_bin, width = 6, height = 5, dpi = 300)
+#ggsave(paste(resdir_fig, 'bam_smes_bins_FCs_on_SAexp_rm_outliers_all_CIs.svg', sep = ''), plot = plot_smes_all_bin, width = 6, height = 5, dpi = 300)
 
 
 
