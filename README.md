@@ -58,6 +58,7 @@ Bianca Serio, Lars Dinkelbach, Mylla Marsiglia, Laura Waite, Felix Hoffstaedter,
 - `p3_bam_gradflip_supp_longitudinal_sample.R` BAM analysis - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
 - `p3_bam_SA_expansion_net_gd_rm_outliers_supp_longitudinal_sample.R` BAM analysis - supplementary - longitudinal sample (with minimum 2 timepoints per subject)
 
+- `p3_supplmentary_exclusion_demographics.ipynb` supplementary figure participant sample characteristics (inclusion vs exclusion)
 
 **4. Functions**
 - `p3_myfunctions.ipynb` contains functions used for main analyses
