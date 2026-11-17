@@ -61,6 +61,8 @@ Bianca Serio, Lars Dinkelbach, Mylla Marsiglia, Laura Waite, Felix Hoffstaedter,
 - `p3_supplmentary_exclusion_demographics.ipynb` supplementary figure participant sample characteristics (inclusion vs exclusion)
 - `p3_main_supp_fig1_ages.ipynb` computes S-A axis and features of S-A axis development - supplementary - by age bins instead of ABCD timepoints
 
+- `p3_revision_lmer_cbcl_regression.R` LMER analysis - revision - check gradient flip and rcoef association to cbcl total problem scores
+
 **4. Functions**
 - `p3_myfunctions.ipynb` contains functions used for main analyses
 
